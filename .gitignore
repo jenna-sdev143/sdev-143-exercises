@@ -1,0 +1,11 @@
+
+# ignore everything in dir1
+dir1/
+
+# ignore everything in dir2
+dir2/
+
+# ignore specific files a and b
+fileA.txt
+fileB.log
+
