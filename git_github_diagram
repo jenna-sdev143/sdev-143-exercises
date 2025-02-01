@@ -1,0 +1,23 @@
+digraph "Git & GitHub Relationship" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Git & GitHub Relationship" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	f1ad10b7096148c58fc5869ca17a5f11 -> "3c1f50f1c18e47dd8da42b3b2de285e7" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"1d3715d8c4124c77ad923541348e69fb" -> "3c1f50f1c18e47dd8da42b3b2de285e7" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	subgraph "cluster_Local Development" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Local Development" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		f1ad10b7096148c58fc5869ca17a5f11 [label="Developer 1" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/client\user.png" shape=none]
+		"1d3715d8c4124c77ad923541348e69fb" [label="Developer 2" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/client\user.png" shape=none]
+		"3c1f50f1c18e47dd8da42b3b2de285e7" [label="Git (Local Repo)" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/vcs\git.png" shape=none]
+	}
+	"575b7ce49ac741c0b8d067a5e4f3b97c" [label="GitHub (Remote Repo)" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/vcs\github.png" shape=none]
+	"8ed6e1e78a6749c4acd279f2f528755b" -> "80976c0c14e24b698b495709bf874741" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	subgraph "cluster_CI/CD Pipeline" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="CI/CD Pipeline" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"8ed6e1e78a6749c4acd279f2f528755b" [label="Continuous Integration" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/ci\jenkins.png" shape=none]
+		"80976c0c14e24b698b495709bf874741" [label="Build & Deploy" height=1.9 image="C:\Users\JenSc\AppData\Local\Programs\Python\Python313\Lib\site-packages\resources/onprem/compute\server.png" shape=none]
+	}
+	"3c1f50f1c18e47dd8da42b3b2de285e7" -> "575b7ce49ac741c0b8d067a5e4f3b97c" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"575b7ce49ac741c0b8d067a5e4f3b97c" -> "3c1f50f1c18e47dd8da42b3b2de285e7" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"575b7ce49ac741c0b8d067a5e4f3b97c" -> "8ed6e1e78a6749c4acd279f2f528755b" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}
