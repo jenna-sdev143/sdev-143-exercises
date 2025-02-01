@@ -2,7 +2,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QScrollArea, QLineEdit, QPushButton, QTextEdit
 from PyQt5.QtGui import QFont, QColor
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 
 # class for the window 
 class GitCommandApp(QWidget):
@@ -11,7 +11,7 @@ class GitCommandApp(QWidget):
 
         # basic window set up
         self.setWindowTitle("Git Terminal Simulator")
-        self.setGeometry(200, 200, 600, 500) # x, y, width, height 
+        self.setGeometry(200, 200, 800, 500) # x, y, width, height 
         
         # set style to look like terminal
         self.setStyleSheet("background-color: black; color: #00ff00")
@@ -50,11 +50,12 @@ class GitCommandApp(QWidget):
             "background-color: black; color: #00ff00; border: 1px solid #00ff00; padding: 5px;"
         )
         self.input_field.setFont(font)
+        self.input_field.returnPressed.connect(self.fake_git_output) # bind enter key
 
         # styled button to run command
         run_btn = QPushButton("Run Command")
         run_btn.setStyleSheet(
-            "backgrounf-color: #333333; color: #00ff00; border: 1px solid #00ff00; padding: 5px;"
+            "background-color: #333333; color: #00ff00; border: 1px solid #00ff00; padding: 5px;"
         )
         run_btn.clicked.connect(self.fake_git_output)
 
@@ -63,23 +64,46 @@ class GitCommandApp(QWidget):
         self.output_box.setReadOnly(True) # cant edit the txt box only read
         self.output_box.setFont(font)
         self.output_box.setStyleSheet(
-            "background-color: #333333; color: #00ff00; border: 1px solid #00ff00; padding: 5px;"
+            "background-color: black; color: #00ff00; border: 1px solid #00ff00; padding: 5px;"
         )
+        self.output_box.setText("|")
+
+        # blinking cursor
+        self.cursor_visible = True
+        self.cursor_timer = QTimer()
+        self.cursor_timer.timeout.connect(self.toggle_cursor)
+        self.cursor_timer.start(500) # blink every 500ms
 
         # layout
         layout = QVBoxLayout()
         layout.addWidget(scroll_area) # add scroll area to layout
         layout.addWidget(self.input_field)
-        layout.addWidget(run_btn)
+        # layout.addWidget(run_btn) # uncomment for btn
         layout.addWidget(self.output_box)
 
         # set the layout
         self.setLayout(layout)
 
+    def toggle_cursor(self):
+        """Toggles blinking cursor effect."""
+        text = self.output_box.toPlainText()
+
+        if self.cursor_visible:
+            self.output_box.setText(text.rstrip("|"))  # remove cursor
+        else:
+            self.output_box.setText(text + "|")  # add cursor
+
+        self.cursor_visible = not self.cursor_visible    
+
     # making a function that simulates git command output
     def fake_git_output(self):
         """Simulates git command output"""
         command = self.input_field.text().strip()
+
+        # clear the screen if 'clear' is entered
+        if command.lower() == "clear":
+            self.output_box.setText("|")  # reset to just the blinking cursor
+            return
 
         # dictionary of fake git responses
         git_responses = {
@@ -98,8 +122,17 @@ class GitCommandApp(QWidget):
         output = git_responses.get(command, "Error: Unknown command")
 
         # formatted output display
-        self.output_box.append(f"{command}\b{output}\n")
-   
+        current_text = self.output_box.toPlainText().rstrip("|")  # remove cursor
+        new_text = f"{current_text}\n$ {command}\n{output}\n|"
+        self.output_box.setText(new_text + "|")
+
+        # FIXME scroll bar & auto-scroll
+        scrollbar = self.output_box.verticalScrollBar()
+        if scrollbar.value() == scrollbar.maximum():
+            scrollbar.setValue(scrollbar.maximum())
+
+        # clear input field after command is entered
+        self.input_field.clear()
 
 # main func to run app
 def main():
