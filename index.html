@@ -9,14 +9,17 @@
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
             margin: 20px;
+            background-color: black;
+            color:#ccc;
         }
         .container {
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
-            background: white;
+            background: rgba(0, 0, 0, 0.614);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
         }
         #todo-list {
             list-style: none;
@@ -30,7 +33,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: whitesmoke;
+            background-color: rgba(0, 0, 0, 0.285);
             align-items: center;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -49,10 +52,18 @@
             border-radius: 5px;
             font-size: 16px;
             font-family: 'Courier New', Courier, monospace;
+            background-color: #030303c3;
+            color: #ccc;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: aquamarine;
+            background-color: #0000006d;
+            color: whitesmoke;
         }
         button {
             padding: 10px 15px;
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 5px;
             background-color: black;
             color: whitesmoke;
@@ -61,7 +72,8 @@
             font-family: 'Courier New', Courier, monospace;
         }
         button:hover {
-            background-color: #3b3a3a;
+            background-color: #0000006d;
+            border-color: aquamarine;
         }
     </style>
 </head>
