@@ -89,6 +89,7 @@
         document.getElementById("add-btn").addEventListener("click", addTodo);
         document.addEventListener("DOMContentLoaded", renderTodos);
 
+        // function to grab existing todos when page is refreshed
         function renderTodos() {
             let list = document.getElementById("todo-list");
             list.innerHTML = "";
@@ -112,6 +113,7 @@
             });
         }
 
+        // function to add a todo to the screen
         function addTodo() {
             let input = document.getElementById("todo-input");
             let task = input.value.trim();
@@ -125,6 +127,7 @@
             renderTodos();
         }
 
+        // function to remove a todo from the screen
         function removeTodo(button) {
             let taskText = button.previousElementSibling.textContent;
             let todos = JSON.parse(localStorage.getItem("todos")) || [];
