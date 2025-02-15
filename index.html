@@ -81,11 +81,13 @@
     <div class="container">
         <h1>To-Do List</h1>
         <input type="text" id="todo-input" placeholder="Enter a task...">
-        <button onclick="addTodo()">Add</button>
+        <button id="add-btn">Add</button>
         <ul id="todo-list"></ul>
     </div>
 
     <script>
+        document.getElementById("add-btn").addEventListener("click", addTodo);
+
         function addTodo() {
             let input = document.getElementById("todo-input");
             let task = input.value.trim();
@@ -94,8 +96,19 @@
             let list = document.getElementById("todo-list");
             let li = document.createElement("li");
             li.className = "todo-item";
-            li.innerHTML = `<span class="todo-text">${task}</span> <button onclick="removeTodo(this)">x</button>`
+
+            let textSpan = document.createElement("span");
+            textSpan.className = "todo-text";
+            textSpan.textContent = task;
+
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "x";
+            deleteButton.addEventListener("click", () => removeTodo(deleteButton));
+
+            li.appendChild(textSpan);
+            li.appendChild(deleteButton);
             list.appendChild(li);
+
             input.value = "";
         }
 
