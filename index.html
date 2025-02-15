@@ -87,33 +87,51 @@
 
     <script>
         document.getElementById("add-btn").addEventListener("click", addTodo);
+        document.addEventListener("DOMContentLoaded", renderTodos);
+
+        function renderTodos() {
+            let list = document.getElementById("todo-list");
+            list.innerHTML = "";
+
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.forEach(task => {
+                let li = document.createElement("li");
+                li.className = "todo-item";
+
+                let textSpan = document.createElement("span");
+                textSpan.className = "todo-text";
+                textSpan.textContent = task;
+
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "x";
+                deleteButton.addEventListener("click", () => removeTodo(deleteButton));
+
+                li.appendChild(textSpan);
+                li.appendChild(deleteButton);
+                list.appendChild(li);
+            });
+        }
 
         function addTodo() {
             let input = document.getElementById("todo-input");
             let task = input.value.trim();
             if (task === "") return;
 
-            let list = document.getElementById("todo-list");
-            let li = document.createElement("li");
-            li.className = "todo-item";
-
-            let textSpan = document.createElement("span");
-            textSpan.className = "todo-text";
-            textSpan.textContent = task;
-
-            let deleteButton = document.createElement("button");
-            deleteButton.textContent = "x";
-            deleteButton.addEventListener("click", () => removeTodo(deleteButton));
-
-            li.appendChild(textSpan);
-            li.appendChild(deleteButton);
-            list.appendChild(li);
-
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.push(task);
+            localStorage.setItem("todos", JSON.stringify(todos));
+           
             input.value = "";
+            renderTodos();
         }
 
         function removeTodo(button) {
-            button.parentElement.remove();
+            let taskText = button.previousElementSibling.textContent;
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            let updatedTodos = todos.filter(todo => todo !== taskText);
+            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+            renderTodos();
         }
     </script>
     
