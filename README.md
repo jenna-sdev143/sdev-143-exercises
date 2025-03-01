@@ -21,3 +21,6 @@ A simple web-based to-do application that allows users to add and remove tasks.
 * HTML
 * CSS
 * JavaScript
+
+### License
+License: MIT.
