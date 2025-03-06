@@ -1,0 +1,52 @@
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - "todo_app/index.html"
+      - "todo_app/style.css"
+      
+  workflow_dispatch:
+  
+permissions:
+   contents: write
+   pages: write
+   id-token: write
+   
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout master branch
+          uses: actions/checkout@v4
+
+        - name: Fetch and switch to gh-pages branch
+          run: |
+            git fetch origin gh-pages
+            git checkout gh-pages
+
+        - name: Copy index.html and style.css from master to gh-pages
+          run: |
+            cp todo_app/index.html ./index.html
+            cp todo_app/style.css ./style.css
+
+        - name: Commit and push changes
+          run: |
+            git config --global user.email "actions@github.com"
+            git config --global user.name "github-actions"
+            git add index.html style.css
+            git diff --quiet && git diff --staged --quiet || git commit -m "Update deployed files from master"
+
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: '.'
+
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
