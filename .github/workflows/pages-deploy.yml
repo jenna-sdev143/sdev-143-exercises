@@ -32,8 +32,8 @@ jobs:
 
         - name: Copy index.html and style.css from master to gh-pages
           run: |
-            git checkout master -- todo_app/index.html
-            git checkout master -- todo_app/style.css
+            git checkout master todo_app/index.html
+            git checkout master todo_app/style.css
 
         - name: Commit and push changes
           run: |
