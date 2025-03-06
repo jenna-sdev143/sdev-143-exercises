@@ -41,6 +41,7 @@ jobs:
             git config --global user.name "github-actions"
             git add index.html style.css
             git diff --quiet && git diff --staged --quiet || git commit -m "Update deployed files from master"
+            git push origin test-gh-pages
 
         - name: Upload artifact
           uses: actions/upload-pages-artifact@v3
