@@ -27,13 +27,13 @@ jobs:
 
         - name: Fetch and switch to gh-pages branch
           run: |
-            git fetch origin gh-pages
-            git checkout gh-pages
+            git fetch origin test-gh-pages
+            git checkout test-gh-pages
 
         - name: Copy index.html and style.css from master to gh-pages
           run: |
-            cp todo_app/index.html ./index.html
-            cp todo_app/style.css ./style.css
+            git checkout master -- todo_app/index.html
+            git checkout master -- todo_app/style.css
 
         - name: Commit and push changes
           run: |
