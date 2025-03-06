@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App </title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<!-- Body -->
+<body>
+    <!-- Test cherry pick commit -->
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="todo-input" placeholder="Enter a task...">
+        <button id="add-btn">Add</button>
+        <ul id="todo-list"></ul>
+    </div>
+    <!-- Scripts -->
+    <script>
+        document.getElementById("add-btn").addEventListener("click", addTodo);
+        document.addEventListener("DOMContentLoaded", renderTodos);
+
+        // function to grab existing todos when page is refreshed
+        function renderTodos() {
+            let list = document.getElementById("todo-list");
+            list.innerHTML = "";
+
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.forEach(task => {
+                let li = document.createElement("li");
+                li.className = "todo-item";
+
+                let textSpan = document.createElement("span");
+                textSpan.className = "todo-text";
+                textSpan.textContent = task;
+
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "x";
+                deleteButton.addEventListener("click", () => removeTodo(deleteButton));
+
+                li.appendChild(textSpan);
+                li.appendChild(deleteButton);
+                list.appendChild(li);
+            });
+        }
+
+        // function to add a todo to the screen
+        function addTodo() {
+            let input = document.getElementById("todo-input");
+            let task = input.value.trim();
+            if (task === "") return;
+
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.push(task);
+            localStorage.setItem("todos", JSON.stringify(todos));
+           
+            input.value = "";
+            renderTodos();
+        }
+
+        // function to remove a todo from the screen
+        function removeTodo(button) {
+            let taskText = button.previousElementSibling.textContent;
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            let updatedTodos = todos.filter(todo => todo !== taskText);
+            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+            renderTodos();
+        }
+    </script>
+    
+</body>
+</html>
+<!-- change for test 3 -->
