@@ -1,26 +1,28 @@
-# SDEV-143 Repository
+# 🏫 SDEV-143 Repository
+Welcome to my **SDEV-143** Repository! 😁
 
-Welcome to my **SDEV-143** repository. :grin:
+## 📁 Repository Structure
+- `.github/workflows/` - Contains the GitHub Actions workflow for automating deployments.
+- `diagrams/` - Python scripts for generating diagrams, with an `img/` subfolder for PNG outputs.
+- `docs/` - Repository documentation, including:
+  - 📖 `README.md` - This file!
+  - 📜 `LICENSE` - MIT License for this repo.
+- `git_simulator/` - A simple Python program that simulates Git commands using PyQt.
+- `todo_app/early_versions/` - Contains text-based drafts of the early todo_app implementation.
 
-This repository is used to showcase my assignments for my SDEV-143 class.
+### 📄 Root Files
+- `.gitignore` - Specifies ignored files and directories.
+- `index.html` & `style.css` - Main files for the **To-do App**, which are automatically deployed to GitHub Pages.
 
-## To-Do App :memo:
-A simple web-based to-do application that allows users to add and remove tasks.
+## 🚀 GitHub Pages Deployment
+This repo includes a **GitHub Actions workflow** that automatically updates the `gh-pages` branch whenever `index.html` or `style.css` changes in `master`.
 
-### Features :dart:
-:white_check_mark: Add tasks dynamically
-:white_check_mark: Remove tasks with a click
-:white_check_mark: Responsive and clean UI
+🔹[To-Do App](https://jenna-sdev143.github.io/sdev-143-exercises/)
 
-### How to Use :information_source:
-1. Enter a task in the input box.
-2. Click the **"Add"** button to add the task to the list.
-3. Click the **"X"** button next to the task to remove it.
+## 🛠️ Technologies Used
+- Git & GitHub
+- Python (for diagrams & git simulator)
+- HTML, CSS, JavaScript (for the to-do app)
 
-### Technologies Used :gear:
-* HTML
-* CSS
-* JavaScript
-
-### License
-License: MIT.
+## 📜 License
+This repository is license under the **MIT License**
