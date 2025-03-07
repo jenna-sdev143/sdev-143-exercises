@@ -17,7 +17,7 @@ Welcome to my **SDEV-143** Repository! 😁
 ## 🚀 GitHub Pages Deployment
 This repo includes a **GitHub Actions workflow** that automatically updates the `gh-pages` branch whenever `index.html` or `style.css` changes in `master`.
 
-🔹[To-Do App](https://jenna-sdev143.github.io/sdev-143-exercises/)
+🔹👉 [To-Do App](https://jenna-sdev143.github.io/sdev-143-exercises/) 👈
 
 ## 🛠️ Technologies Used
 - Git & GitHub
@@ -25,4 +25,4 @@ This repo includes a **GitHub Actions workflow** that automatically updates the 
 - HTML, CSS, JavaScript (for the to-do app)
 
 ## 📜 License
-This repository is license under the **MIT License**
+This repository is licensed under the **MIT License**
